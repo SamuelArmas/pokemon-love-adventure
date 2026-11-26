@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokémon Love Adventure — Luis Fer · 3 Años Juntos</title>
+  <meta name="description" content="Regalo interactivo de 3er aniversario estilo Pokémon para Luis Fer: misión secreta a los Túneles del Nevado de Toluca, Pokédex de recuerdos, carta especial, playlist e inventario de amor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- =====================================================================
+       1. PANTALLA DE BIENVENIDA INTERACTIVA (POKÉMON EMERALD START SCREEN)
+       ===================================================================== -->
+  <div id="introOverlay" class="intro-overlay" role="dialog" aria-modal="true" aria-label="Pantalla de bienvenida Pokémon Love Adventure">
+    <div class="intro-stars" aria-hidden="true"></div>
+    <div class="intro-card">
+      <div class="intro-badge" id="introEdition">PLAYER 001 · ANNIVERSARY EDITION</div>
+      <h1 class="intro-title" id="introTitle">POKÉMON LOVE ADVENTURE</h1>
+      <p class="intro-subtitle" id="introSubtitle">3 YEARS OF US ♡ · EDICIÓN LUIS FER</p>
+
+      <div class="intro-stage">
+        <img class="pixel-sprite intro-sprite" src="assets/sprites/54.png" alt="Psyduck" />
+        <img class="pixel-sprite intro-sprite" src="assets/sprites/1.png" alt="Bulbasaur" />
+        <button id="introPokeball" class="pokeball-trigger" type="button" aria-label="Abrir Pokébola de bienvenida" title="¡Toca la Pokébola!"></button>
+        <img class="pixel-sprite intro-sprite" src="assets/sprites/4.png" alt="Charmander" />
+        <img class="pixel-sprite intro-sprite" src="assets/sprites/725.png" alt="Litten" />
+      </div>
+
+      <div class="gba-dialogue intro-dialogue">
+        <span id="introDialogueText"></span>
+        <span class="dialogue-arrow" aria-hidden="true">▼</span>
+      </div>
+
+      <div class="intro-actions">
+        <button id="startAdventureBtn" class="px-btn" type="button">
+          ▶ Comenzar nuestra aventura
+        </button>
+        <button id="startMusicIntroBtn" class="px-btn px-btn--forest" type="button">
+          ♪ Comenzar con música 8-bit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       TOP GAME HUD & BARRA DE NAVEGACIÓN (6 SECCIONES)
+       ===================================================================== -->
+  <header class="top-hud">
+    <div class="top-hud-inner">
+      <a class="hud-brand" href="#inicio">
+        <span class="hud-pokeball-dot" aria-hidden="true"></span>
+        <span class="hud-title-wrap">
+          <span class="hud-trainer" id="hudTrainer">LUIS FER · LV.03</span>
+          <span class="hud-sub">POKÉMON LOVE ADVENTURE · 3 AÑOS ♡</span>
+        </span>
+      </a>
+
+      <div class="hud-controls">
+        <button id="bgmToggleBtn" class="hud-pill" type="button" aria-pressed="false" title="Activar o silenciar música retro 8-bit">
+          ♪ 8-BIT: OFF
+        </button>
+        <button id="replayIntroBtn" class="hud-pill" type="button" title="Ver pantalla de inicio">
+          ★ INTRO
+        </button>
+        <button id="openEditorBtn" class="hud-pill" type="button" title="Personalizar fotos, carta, playlist y misión">
+          ⚙ EDITAR
+        </button>
+      </div>
+    </div>
+
+    <nav class="game-nav-bar" aria-label="Explorar nuestra aventura">
+      <div class="game-nav-inner">
+        <a class="game-nav-link" href="#equipo">⚡ Equipo</a>
+        <a class="game-nav-link" href="#mision">🏔️ Misión</a>
+        <a class="game-nav-link" href="#pokedex">📖 Recuerdos</a>
+        <a class="game-nav-link" href="#carta">✉️ Mi Carta</a>
+        <a class="game-nav-link" href="#playlist">🎵 Playlist</a>
+        <a class="game-nav-link" href="#inventario">🎒 Inventario</a>
+        <a class="game-nav-link" href="#nivel3">★ Nivel 3</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =====================================================================
+       MUNDO PRINCIPAL DE LA AVENTURA
+       ===================================================================== -->
+  <main class="world-container">
+
+    <!-- HERO BANNER + TRAINER CARD -->
+    <section id="inicio" class="hero-banner" aria-label="Bienvenida">
+      <div class="hero-scene">
+        <div class="hero-clouds" aria-hidden="true">
+          <span class="px-cloud px-cloud--1"></span>
+          <span class="px-cloud px-cloud--2"></span>
+          <span class="px-cloud px-cloud--3"></span>
+        </div>
+
+        <!-- Silueta pixel-art del Nevado de Toluca -->
+        <svg class="hero-mountains" viewBox="0 0 960 140" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="0,140 90,65 180,140" fill="#3a6b7c" />
+          <polygon points="120,140 275,28 430,140" fill="#2d556b" />
+          <polygon points="275,28 240,62 262,56 275,68 292,55 312,62" fill="#f7fbff" />
+          <polygon points="360,140 530,16 700,140" fill="#23485d" />
+          <polygon points="530,16 484,58 510,50 530,66 552,50 578,58" fill="#ffffff" />
+          <polygon points="620,140 770,46 920,140" fill="#35667a" />
+          <polygon points="770,46 742,74 762,68 775,78 796,72" fill="#eef7ff" />
+          <polygon points="820,140 910,72 960,112 960,140" fill="#285349" />
+        </svg>
+
+        <div class="hero-content">
+          <div>
+            <div class="hero-pill-row">
+              <span class="hero-chip" id="heroEditionChip">PLAYER 001 · ANNIVERSARY EDITION</span>
+              <span class="hero-chip hero-chip--red">NEW QUEST UNLOCKED</span>
+            </div>
+            <h2 class="hero-heading" id="heroHeading">POKÉMON LOVE ADVENTURE</h2>
+            <p class="hero-lead" id="heroLead">
+              Una aventura, dos entrenadores y muchísimas historias por vivir. ¡Feliz 3er aniversario, Luis Fer!
+            </p>
+            <div class="hero-cta-row">
+              <a class="px-btn" href="#mision">🏔️ Descubrir Misión Secreta</a>
+              <a class="px-btn px-btn--gold" href="#carta">✉️ Abrir Mi Carta</a>
+            </div>
+          </div>
+
+          <aside class="trainer-card" aria-label="Tarjeta de entrenador">
+            <div class="trainer-card-head">
+              <span class="trainer-card-title">TRAINER CARD</span>
+              <span class="trainer-id">ID No. 061226</span>
+            </div>
+            <div class="trainer-stats">
+              <div>
+                <p class="trainer-stat-line">ENTRENADOR: <span id="cardTrainerName">Papatin</span></p>
+                <p class="trainer-stat-line">COMPAÑERA: <span id="cardPartnerName">Tu entrenadora favorita</span></p>
+                <p class="trainer-stat-line">TIEMPO DE JUEGO: <span id="cardPlayTime">3 Años Juntos</span></p>
+                <p class="trainer-stat-line">REGIÓN: <span>Nevado Quest</span></p>
+              </div>
+              <div class="trainer-mascot-box" title="Psyduck guía de la aventura">
+                <img class="pixel-sprite" src="assets/sprites/54.png" alt="Psyduck sprite" />
+              </div>
+            </div>
+            <div class="trainer-badges-bar">
+              <span>MEDALLAS DE AMOR</span>
+              <span class="badge-hearts" aria-label="3 corazones de aniversario">♥ ♥ ♥</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TU EQUIPO POKÉMON (6 SPRITES PIXEL-ART UNIFICADOS)
+         =================================================================== -->
+    <section id="equipo" class="gba-panel team-panel" aria-labelledby="teamHeading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">YOUR TEAM · 6/6 LISTOS</span>
+          <h2 class="section-title" id="teamHeading">Tu Equipo Pokémon de Aniversario</h2>
+        </div>
+        <span class="hud-pill" style="cursor: default;">Toca a cada Pokémon para hablar con él</span>
+      </div>
+
+      <div id="teamGrid" class="team-grid"></div>
+
+      <div class="gba-dialogue team-dialogue-box" aria-live="polite">
+        <div class="team-dialogue-sprite">
+          <img id="teamTalkSprite" class="pixel-sprite" src="assets/sprites/54.png" alt="Pokémon hablando" />
+        </div>
+        <div>
+          <div id="teamTalkSpeaker" class="team-dialogue-speaker">PSYDUCK (#054) DICE:</div>
+          <p id="teamTalkText" class="team-dialogue-text"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         2. NUESTRA PRÓXIMA AVENTURA: MISIÓN SECRETA (NEVADO DE TOLUCA)
+         =================================================================== -->
+    <section id="mision" class="gba-panel mission-panel" aria-labelledby="missionHeading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker" id="missionCodeBadge">MISIÓN LEGENDARIA #006 · SORPRESA</span>
+          <h2 class="section-title" id="missionHeading">Nuestra Próxima Aventura: Misión Secreta</h2>
+        </div>
+        <button id="revealMissionQuickBtn" class="px-btn px-btn--gold px-btn--sm" type="button">
+          ★ Revelar misión ahora
+        </button>
+      </div>
+
+      <!-- Pistas interactivas con Psyduck -->
+      <div class="clues-box">
+        <div class="clues-header">
+          <div class="clues-guide">
+            <img class="pixel-sprite" src="assets/sprites/54.png" alt="Psyduck pistas" />
+            <div>
+              <strong style="font-family: var(--font-pixel); font-size: 0.68rem; color: var(--poke-red); display: block; margin-bottom: 4px;">
+                PSYDUCK ENCONTRÓ 3 PISTAS SECRETAS
+              </strong>
+              <span style="font-size: 0.9rem; font-weight: 700;">
+                Haz clic en las 3 pistas para desbloquear tu regalo sorpresa de aniversario:
+              </span>
+            </div>
+          </div>
+          <span id="clueProgressBadge" class="hero-chip">PISTAS: 0 / 3</span>
+        </div>
+
+        <div id="cluesGrid" class="clues-grid"></div>
+      </div>
+
+      <!-- Tarjeta de misión revelada -->
+      <div id="missionRevealCard" class="mission-reveal is-locked">
+        <div class="mission-lock-curtain">
+          <img class="pixel-sprite" src="assets/items/poke-ball.svg" alt="Pokébola secreta" style="width: 56px; height: 56px;" />
+          <div style="font-family: var(--font-pixel); font-size: 0.78rem; color: var(--gold-bright);">
+            DESTINO SECRETO BLOQUEADO
+          </div>
+          <p style="margin: 0; max-width: 440px; font-weight: 700;">
+            Abre las 3 pistas de Psyduck arriba para revelar la misión legendaria que planeé para nosotros.
+          </p>
+          <button id="unlockCurtainBtn" class="px-btn px-btn--gold px-btn--sm" type="button">
+            🔓 Abrir directamente
+          </button>
+        </div>
+
+        <div class="mission-secret-content">
+          <div class="mission-top-banner">
+            <div>
+              <span class="hero-chip hero-chip--red" id="missionBadgeText">MISIÓN #006 · Sorpresa desbloqueada</span>
+              <h3 class="mission-quest-title" id="missionQuestTitle">THE MOUNTAIN QUEST</h3>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.45rem;">
+              <img class="pixel-sprite" src="assets/sprites/54.png" alt="Psyduck" style="width: 52px; height: 52px;" />
+              <img class="pixel-sprite" src="assets/sprites/4.png" alt="Charmander" style="width: 52px; height: 52px;" />
+            </div>
+          </div>
+
+          <div class="mission-dest-box">
+            <div>
+              <span style="font-family: var(--font-pixel); font-size: 0.56rem; color: var(--poke-red);">
+                ¡NOS VAMOS DE AVENTURA! · DESTINO CONFIRMADO
+              </span>
+              <h4 class="dest-name" id="missionDestination">Túneles del Nevado de Toluca</h4>
+              <p id="missionSummary" style="margin: 0; font-weight: 700; font-size: 0.94rem;"></p>
+            </div>
+            <div class="mission-schedule-grid">
+              <div class="schedule-tile">
+                <span class="schedule-label">FECHA DE EXPEDICIÓN</span>
+                <span class="schedule-val" id="missionDateVal">06 DICIEMBRE 2026</span>
+              </div>
+              <div class="schedule-tile">
+                <span class="schedule-label">HORA DE INICIO</span>
+                <span class="schedule-val" id="missionTimeVal">07:00 AM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuenta regresiva a la expedición -->
+          <div class="countdown-bar" aria-label="Cuenta regresiva para el Nevado de Toluca">
+            <div class="cd-cell"><span class="cd-num" id="cdDays">00</span><span class="cd-unit">DÍAS</span></div>
+            <div class="cd-cell"><span class="cd-num" id="cdHours">00</span><span class="cd-unit">HORAS</span></div>
+            <div class="cd-cell"><span class="cd-num" id="cdMins">00</span><span class="cd-unit">MINUTOS</span></div>
+            <div class="cd-cell"><span class="cd-num" id="cdSecs">00</span><span class="cd-unit">SEGUNDOS</span></div>
+          </div>
+
+          <div class="mission-bottom-grid">
+            <div class="objectives-box">
+              <div class="objectives-head">
+                <span>OBJETIVOS DE LA MISIÓN</span>
+                <span id="objectivesCounter" style="color: var(--forest-deep);">1/4</span>
+              </div>
+              <ul id="objectivesList" class="objective-list"></ul>
+            </div>
+
+            <div class="reward-box">
+              <div>
+                <span class="reward-tag">★ RECOMPENSA DESBLOQUEADA</span>
+                <h4 class="reward-title" id="missionRewardTitle">Un día inolvidable juntos ❤️</h4>
+              </div>
+              <p id="missionObjectiveText" style="margin: 0; font-size: 0.88rem; font-weight: 700;"></p>
+              <p id="missionRewardText" style="margin: 0; font-size: 0.88rem; font-weight: 800; color: var(--forest-deep);"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. NUESTRA POKÉDEX DE RECUERDOS (TARJETAS COLECCIONABLES DE FOTOS)
+         =================================================================== -->
+    <section id="pokedex" class="pokedex-shell" aria-labelledby="pokedexHeading">
+      <div class="pokedex-top-lights">
+        <div style="display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;">
+          <div class="dex-leds" aria-hidden="true">
+            <span class="dex-lens"></span>
+            <span class="dex-dot dex-dot--r"></span>
+            <span class="dex-dot dex-dot--y"></span>
+            <span class="dex-dot dex-dot--g"></span>
+          </div>
+          <div>
+            <span class="section-kicker">REGISTRO DE MOMENTOS · 6 ENTRADAS</span>
+            <h2 class="section-title" id="pokedexHeading">Nuestra Pokédex de Recuerdos</h2>
+          </div>
+        </div>
+        <button id="quickAddPhotosBtn" class="px-btn px-btn--gold px-btn--sm" type="button">
+          📷 Subir / Cambiar Fotos
+        </button>
+      </div>
+
+      <div class="pokedex-screen">
+        <div id="memoryGrid" class="memory-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. UNA CARTA ESPECIAL (SOBRE INTERACTIVO)
+         =================================================================== -->
+    <section id="carta" class="gba-panel letter-panel" aria-labelledby="letterHeading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">CORREO POKÉMON · MENSAJE ESPECIAL</span>
+          <h2 class="section-title" id="letterHeading">Una Carta Especial de Tu Compañera</h2>
+        </div>
+      </div>
+
+      <div class="envelope-stage">
+        <div id="envelopeClosed" class="envelope-closed" role="button" tabindex="0" aria-expanded="false" aria-label="Abrir carta de aniversario">
+          <div class="envelope-flap" aria-hidden="true"></div>
+          <div class="envelope-seal" aria-hidden="true"></div>
+          <h3 class="envelope-to" id="envelopeToText">Para: Luis Fer</h3>
+          <p class="envelope-hint">Tienes un correo nuevo por nuestro 3er aniversario. Toca el sello para abrir tu carta.</p>
+          <span class="px-btn px-btn--sm">✉️ Abrir Carta</span>
+        </div>
+
+        <article id="letterSheet" class="letter-sheet" aria-label="Carta de aniversario">
+          <div class="letter-head-bar">
+            <h3 class="letter-greeting" id="letterGreeting">A mi compañero de aventuras...</h3>
+            <span class="hero-chip" id="letterDateLabel">3er Aniversario · 2026</span>
+          </div>
+
+          <div id="letterBody" class="letter-body"></div>
+
+          <div class="letter-footer">
+            <div id="letterSignature" class="letter-signature"></div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <img class="pixel-sprite" src="assets/sprites/1.png" alt="Bulbasaur" style="width: 52px; height: 52px;" />
+              <img class="pixel-sprite" src="assets/sprites/725.png" alt="Litten" style="width: 52px; height: 52px;" />
+              <button id="closeLetterBtn" class="px-btn px-btn--cream px-btn--sm" type="button">Guardar sobre</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. NUESTRA PLAYLIST (POKÉGEAR RADIO)
+         =================================================================== -->
+    <section id="playlist" class="gba-panel playlist-panel" aria-labelledby="playlistHeading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">POKÉGEAR RADIO · SOUNDTRACK</span>
+          <h2 class="section-title" id="playlistHeading">Nuestra Playlist de Aventuras 🎵</h2>
+        </div>
+      </div>
+
+      <div class="radio-player-bar">
+        <div class="radio-status">
+          <div id="radioEq" class="eq-bars" aria-hidden="true">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <div>
+            <div class="radio-channel" id="radioStatusTitle">CANAL 03 · MELODÍA 8-BIT DE ANIVERSARIO</div>
+            <div class="radio-track-sub" id="radioStatusSub">Activa la cajita musical retro o abre nuestras canciones en Spotify / YouTube.</div>
+          </div>
+        </div>
+        <button id="radioPlayBtn" class="px-btn px-btn--gold px-btn--sm" type="button">
+          ▶ Reproducir 8-bit
+        </button>
+      </div>
+
+      <div id="trackGrid" class="track-grid"></div>
+    </section>
+
+    <!-- ===================================================================
+         6. INVENTARIO DE NUESTRO AMOR (MOCHILA POKÉMON)
+         =================================================================== -->
+    <section id="inventario" class="gba-panel bag-panel" aria-labelledby="bagHeading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">MOCHILA · OBJETOS CLAVE DE AMOR</span>
+          <h2 class="section-title" id="bagHeading">Inventario de Nuestro Amor 🎒</h2>
+        </div>
+        <span class="hud-pill" style="cursor: default;">¡Puedes canjear cada objeto cuando quieras!</span>
+      </div>
+
+      <div id="bagGrid" class="bag-grid"></div>
+
+      <div id="bagFeedback" class="gba-dialogue bag-feedback" aria-live="polite">
+        Selecciona cualquier objeto de tu mochila para ver tu vale especial de aniversario.
+        <span class="dialogue-arrow" aria-hidden="true">▼</span>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         7. EL SIGUIENTE NIVEL: NUESTRA PRÓXIMA AVENTURA
+         =================================================================== -->
+    <section id="nivel3" class="gba-panel finale-panel" aria-labelledby="finaleHeading">
+      <span class="hero-chip" id="finaleBadge">NIVEL 03 COMPLETADO</span>
+
+      <div class="finale-sprites-row" aria-label="Todo el equipo Pokémon celebrando">
+        <img class="pixel-sprite" src="assets/sprites/54.png" alt="Psyduck" />
+        <img class="pixel-sprite" src="assets/sprites/1.png" alt="Bulbasaur" />
+        <img class="pixel-sprite" src="assets/sprites/4.png" alt="Charmander" />
+        <img class="pixel-sprite" src="assets/sprites/725.png" alt="Litten" />
+        <img class="pixel-sprite" src="assets/sprites/143.png" alt="Snorlax" />
+        <img class="pixel-sprite" src="assets/sprites/104.png" alt="Cubone" />
+      </div>
+
+      <h2 class="finale-title" id="finaleHeading">El siguiente nivel: nuestra próxima aventura</h2>
+
+      <div class="gba-dialogue finale-quote">
+        <span id="finaleText"></span>
+        <span class="dialogue-arrow" aria-hidden="true">▼</span>
+      </div>
+
+      <button id="continuePlayingBtn" class="px-btn px-btn--gold" type="button">
+        CONTINUAR JUGANDO JUNTOS ♡
+      </button>
+
+      <div id="finaleSavedToast" class="finale-saved-toast" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    POKÉMON LOVE ADVENTURE © · Made with love · Anniversary Edition · 2026
+  </footer>
+
+  <!-- =====================================================================
+       MODAL: DETALLE DE RECUERDO EN LA POKÉDEX
+       ===================================================================== -->
+  <div id="memoryModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="memoryModalTitle">
+    <div class="modal-window">
+      <div class="modal-head">
+        <h3 id="memoryModalTitle" class="modal-title">ENTRADA POKÉDEX</h3>
+        <button id="closeMemoryModal" class="modal-close" type="button" aria-label="Cerrar">✕</button>
+      </div>
+      <div id="memoryModalPhotoBox" class="detail-photo-box"></div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+        <span id="memoryModalMeta" class="hero-chip"></span>
+        <label class="px-btn px-btn--sky px-btn--sm" style="cursor: pointer;">
+          📷 Cambiar foto de este recuerdo
+          <input id="memoryModalFileInput" type="file" accept="image/*" hidden />
+        </label>
+      </div>
+      <div class="gba-dialogue">
+        <p id="memoryModalDesc" style="margin: 0; font-weight: 700;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL: EDITOR VISUAL PARA PERSONALIZAR FOTOS, CARTA, PLAYLIST Y MISIÓN
+       ===================================================================== -->
+  <div id="editorModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="editorModalTitle">
+    <div class="modal-window">
+      <div class="modal-head">
+        <h3 id="editorModalTitle" class="modal-title">⚙ PERSONALIZAR POKÉMON LOVE ADVENTURE</h3>
+        <button id="closeEditorModal" class="modal-close" type="button" aria-label="Cerrar">✕</button>
+      </div>
+
+      <p style="margin: 0 0 0.85rem; font-size: 0.88rem; font-weight: 700; color: var(--ink-soft);">
+        Edita aquí tus <strong>fotos reales</strong>, la <strong>carta</strong>, la <strong>playlist</strong> y la <strong>misión</strong>.
+        Los cambios se guardan al instante en este navegador, y puedes descargar un archivo <code>data.js</code> listo para publicar la página con todo incluido.
+      </p>
+
+      <div class="editor-tabs" role="tablist">
+        <button class="editor-tab is-active" data-tab="tabPhotos" type="button">📷 Fotos & Pokédex</button>
+        <button class="editor-tab" data-tab="tabLetter" type="button">✉️ Carta</button>
+        <button class="editor-tab" data-tab="tabPlaylist" type="button">🎵 Playlist</button>
+        <button class="editor-tab" data-tab="tabGeneral" type="button">🏔️ General & Misión</button>
+      </div>
+
+      <div id="tabPhotos" class="editor-pane is-active"></div>
+      <div id="tabLetter" class="editor-pane"></div>
+      <div id="tabPlaylist" class="editor-pane"></div>
+      <div id="tabGeneral" class="editor-pane"></div>
+
+      <div class="editor-actions">
+        <button id="resetDataBtn" class="px-btn px-btn--cream px-btn--sm" type="button">↺ Restaurar base</button>
+        <button id="exportDataJsBtn" class="px-btn px-btn--forest px-btn--sm" type="button">💾 Descargar data.js</button>
+        <button id="saveEditorBtn" class="px-btn px-btn--sm" type="button">✓ Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Capa de confeti pixelado -->
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
