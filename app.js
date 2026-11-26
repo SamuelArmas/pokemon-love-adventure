@@ -6,7 +6,7 @@
   "use strict";
 
   const STORAGE_KEY = "pokemon_love_adventure_luis_fer_v1";
-  const STATE_KEY = "pokemon_love_adventure_progress_v1";
+  const STATE_KEY = "pokemon_love_adventure_progress_v2";
 
   // -------------------------------------------------------------------------
   // 1. ESTADO Y PERSISTENCIA
@@ -37,13 +37,7 @@
     }
   }
 
-  function loadProgress() {
-    try {
-      const raw = localStorage.getItem(STATE_KEY);
-      if (raw) return JSON.parse(raw);
-    } catch (err) {
-      /* ignore */
-    }
+  function getDefaultProgress() {
     return {
       unlockedClues: [],
       missionRevealed: false,
@@ -51,6 +45,27 @@
       claimedItems: {},
       selectedPokemonId: 54
     };
+  }
+
+  function loadProgress() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("reset")) {
+        localStorage.removeItem(STATE_KEY);
+        localStorage.removeItem("pokemon_love_adventure_progress_v1");
+        params.delete("reset");
+        const cleanQuery = params.toString();
+        const cleanUrl =
+          window.location.pathname + (cleanQuery ? `?${cleanQuery}` : "") + window.location.hash;
+        window.history.replaceState({}, "", cleanUrl);
+        return getDefaultProgress();
+      }
+      const raw = localStorage.getItem(STATE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (err) {
+      /* ignore */
+    }
+    return getDefaultProgress();
   }
 
   function saveProgress(prog) {
@@ -889,11 +904,32 @@
     });
     document.getElementById("saveEditorBtn").addEventListener("click", commitEditorChanges);
     document.getElementById("exportDataJsBtn").addEventListener("click", exportUpdatedDataJs);
+    function resetAdventureProgress() {
+      localStorage.removeItem(STATE_KEY);
+      localStorage.removeItem("pokemon_love_adventure_progress_v1");
+      progress = getDefaultProgress();
+      letterSheet.classList.remove("is-open");
+      envelopeClosed.style.display = "block";
+      envelopeClosed.setAttribute("aria-expanded", "false");
+      document.getElementById("bagFeedback").innerHTML =
+        'Selecciona cualquier objeto de tu mochila para ver tu vale especial de aniversario. <span class="dialogue-arrow" aria-hidden="true">▼</span>';
+      document.getElementById("finaleSavedToast").classList.remove("is-visible");
+      renderAll();
+    }
+
+    document.getElementById("resetProgressBtn").addEventListener("click", () => {
+      if (confirm("¿Reiniciar pistas, misión secreta, carta y vales como al inicio? (Tus fotos y textos guardados se conservan)")) {
+        resetAdventureProgress();
+        editorModal.classList.remove("is-open");
+        introOverlay.classList.remove("is-hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
     document.getElementById("resetDataBtn").addEventListener("click", () => {
-      if (confirm("¿Seguro que quieres restaurar los textos y recuerdos originales?")) {
+      if (confirm("¿Seguro que quieres restaurar los textos, recuerdos y progreso originales?")) {
         localStorage.removeItem(STORAGE_KEY);
         data = deepClone(window.DEFAULT_ADVENTURE_DATA);
-        renderAll();
+        resetAdventureProgress();
         buildEditorUI("tabPhotos");
       }
     });
